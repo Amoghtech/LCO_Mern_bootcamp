@@ -1,5 +1,4 @@
 import { API } from "../../backend";
-// API means  ; http://localhost:8000/api/
 
 export const signup = (user) => {
   return fetch(`${API}/signup`, {
@@ -32,27 +31,27 @@ export const signin = (user) => {
 };
 
 export const authenticate = (data, next) => {
-  if (typeof windows !== "undefined") {
+  if (typeof window !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(data));
     next();
   }
 };
 
 export const signout = (next) => {
-  if (typeof windows !== "undefined") {
+  if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");
     next();
 
     return fetch(`${API}/signout`, {
       method: "GET",
     })
-      .then((response) => console.log("Signout Success"))
+      .then((response) => console.log("signout success"))
       .catch((err) => console.log(err));
   }
 };
 
 export const isAuthenticated = () => {
-  if (typeof windows == "undefined") {
+  if (typeof window == "undefined") {
     return false;
   }
   if (localStorage.getItem("jwt")) {
