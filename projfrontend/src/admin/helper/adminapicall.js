@@ -13,5 +13,5 @@ export const createCategory = (userId, token, category) => {
     .then((response) => {
       return response.json();
     })
-    .catch((err) => console.log(err));
+    .catch((er) => console.log(er));
 };
