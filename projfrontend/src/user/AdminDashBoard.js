@@ -12,28 +12,39 @@ const AdminDashBoard = () => {
       <div className="card">
         <h4 className="card-header bg-dark text-white">Admin Navigation</h4>
         <ul className="list-group">
-          <li className="list-group-item"></li>
-          <Link to="/admin/create/category" className="nav-link text-success">
-            Create Categories
-          </Link>
+          <li className="list-group-item">
+            <Link to="/admin/create/category" className="nav-link text-success">
+              Create Categories
+            </Link>
+          </li>
         </ul>
         <ul className="list-group">
-          <li className="list-group-item"></li>
-          <Link to="/admin/create/product" className="nav-link text-success">
-            Create Products
-          </Link>
+          <li className="list-group-item">
+            <Link to="/admin/categories" className="nav-link text-success">
+              Manage Categories
+            </Link>
+          </li>
         </ul>
         <ul className="list-group">
-          <li className="list-group-item"></li>
-          <Link to="/admin/create/products" className="nav-link text-success">
-            Manage Products
-          </Link>
+          <li className="list-group-item">
+            <Link to="/admin/create/product" className="nav-link text-success">
+              Create Products
+            </Link>
+          </li>
         </ul>
         <ul className="list-group">
-          <li className="list-group-item"></li>
-          <Link to="/admin/create/orders" className="nav-link text-success">
-            Manage Orders
-          </Link>
+          <li className="list-group-item">
+            <Link to="/admin/create/products" className="nav-link text-success">
+              Manage Products
+            </Link>
+          </li>
+        </ul>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <Link to="/admin/create/orders" className="nav-link text-success">
+              Manage Orders
+            </Link>
+          </li>
         </ul>
       </div>
     );
