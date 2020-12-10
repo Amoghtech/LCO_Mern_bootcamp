@@ -5,7 +5,7 @@ exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
     if (err || !user) {
       return res.status(400).json({
-        error: "No user was found in DB"
+        error: "No user was found in DB",
       });
     }
     req.profile = user;
@@ -27,7 +27,7 @@ exports.updateUser = (req, res) => {
     (err, user) => {
       if (err) {
         return res.status(400).json({
-          error: "You are not authorized to update this user"
+          error: "You are not authorized to update this user",
         });
       }
       user.salt = undefined;
@@ -43,7 +43,7 @@ exports.userPurchaseList = (req, res) => {
     .exec((err, order) => {
       if (err) {
         return res.status(400).json({
-          error: "No Order in this account"
+          error: "No Order in this account",
         });
       }
       return res.json(order);
@@ -52,7 +52,7 @@ exports.userPurchaseList = (req, res) => {
 
 exports.pushOrderInPurchaseList = (req, res, next) => {
   let purchases = [];
-  req.body.order.products.forEach(product => {
+  req.body.order.products.forEach((product) => {
     purchases.push({
       _id: product._id,
       name: product.name,
@@ -60,7 +60,7 @@ exports.pushOrderInPurchaseList = (req, res, next) => {
       category: product.category,
       quantity: product.quantity,
       amount: req.body.order.amount,
-      transaction_id: req.body.order.transaction_id
+      transaction_id: req.body.order.transaction_id,
     });
   });
 
@@ -72,7 +72,7 @@ exports.pushOrderInPurchaseList = (req, res, next) => {
     (err, purchases) => {
       if (err) {
         return res.status(400).json({
-          error: "Unable to save purchase list"
+          error: "Unable to save purchase list",
         });
       }
       next();
