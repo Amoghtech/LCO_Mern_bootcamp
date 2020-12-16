@@ -3,6 +3,7 @@ import "../styles.css";
 import Base from "./Base";
 import Card from "./Card";
 import { loadCart } from "./helper/cartHelper";
+import StripeCheckout from "./StripeCheckout";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,7 @@ const Cart = () => {
   const loadCheckout = () => {
     return (
       <div>
-        <h2>This section is for checkout</h2>
+        <h2 className="text-white">This section is for checkout</h2>
       </div>
     );
   };
@@ -39,10 +40,12 @@ const Cart = () => {
   return (
     <Base title="Cart Page" description="Ready to checkout">
       <div className="row text-center">
-        <h1 className="text-white">All of tshirts</h1>
+        <h1 className="text-white">All of tshirts </h1>
         <div className="row text-center">
+          <div className="col-6">
+            <StripeCheckout />
+          </div>
           <div className="col-6">{loadAllProducts()}</div>
-          <div className="col-6">{loadCheckout()}</div>
         </div>
       </div>
     </Base>
