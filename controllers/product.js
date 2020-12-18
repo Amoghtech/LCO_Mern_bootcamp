@@ -4,8 +4,6 @@ const _ = require("lodash");
 const fs = require("fs");
 
 exports.getProductById = (req, res, next, id) => {
-  console.log("in getProductById  route");
-
   Product.findById(id)
     .populate("category")
     .exec((err, product) => {
@@ -20,8 +18,6 @@ exports.getProductById = (req, res, next, id) => {
 };
 
 exports.createProduct = (req, res) => {
-  console.log("in createProduct  route");
-
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
 
@@ -52,7 +48,6 @@ exports.createProduct = (req, res) => {
       product.photo.data = fs.readFileSync(file.photo.path);
       product.photo.contentType = file.photo.type;
     }
-    // console.log(product);
 
     //save to the DB
     product.save((err, product) => {
@@ -67,8 +62,6 @@ exports.createProduct = (req, res) => {
 };
 
 exports.getProduct = (req, res) => {
-  console.log("in getProduct  route");
-
   req.product.photo = undefined;
   return res.json(req.product);
 };
@@ -84,8 +77,6 @@ exports.photo = (req, res, next) => {
 
 // delete controllers
 exports.deleteProduct = (req, res) => {
-  console.log("in deleteProduct product route");
-
   let product = req.product;
   product.remove((err, deletedProduct) => {
     if (err) {
@@ -104,7 +95,6 @@ exports.deleteProduct = (req, res) => {
 exports.updateProduct = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
-  console.log("in update product route");
   form.parse(req, (err, fields, file) => {
     if (err) {
       return res.status(400).json({
@@ -126,7 +116,6 @@ exports.updateProduct = (req, res) => {
       product.photo.data = fs.readFileSync(file.photo.path);
       product.photo.contentType = file.photo.type;
     }
-    // console.log(product);
 
     //save to the DB
     product.save((err, product) => {
@@ -145,7 +134,6 @@ exports.updateProduct = (req, res) => {
 exports.getAllProducts = (req, res) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 8;
   let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-  console.log("in get all products route");
   Product.find()
     .select("-photo")
     .populate("category")
@@ -157,7 +145,6 @@ exports.getAllProducts = (req, res) => {
           error: "NO product FOUND",
         });
       }
-      console.log(products);
       res.json(products);
     });
 };
