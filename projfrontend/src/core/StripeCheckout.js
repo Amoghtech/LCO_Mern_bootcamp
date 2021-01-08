@@ -24,11 +24,13 @@ const StripeCheckout = ({
     let amount = 0;
     products.map((p) => {
       amount = amount + p.price;
+      return amount;
     });
     return amount;
   };
 
   const makePayment = (token) => {
+    console.log("MAKE PAYMENT");
     const body = {
       token,
       products,
@@ -36,22 +38,27 @@ const StripeCheckout = ({
     const headers = {
       "Content-Type": "application/json",
     };
+    console.log("body", body);
     return fetch(`${API}/stripepayment`, {
       method: "POST",
       headers,
       body: JSON.stringify(body),
     })
       .then((response) => {
+        console.log("In Response ");
         console.log(response);
         //! CREATE FURTHER METHODS..
+        const { status } = response;
+        console.log("Status", status);
+        cartEmpty();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("ERROR:: >>>>>>", err));
   };
 
   const showStripeButton = () => {
     return isAutheticated() ? (
       <StripeCheckoutButton
-        stripeKey=""
+        stripeKey="pk_test_51HFjpKIFpVx1LutXbMGdNZVIkcewenUXhCqc3I4aJQGvZlqg2XKVgGqK5UZWhTmgP1O5jXovuryLwpnoTAN1skFb00BUxRXiLe"
         token={makePayment}
         amount={getFinalAmount() * 100}
         name="Buy T-shirt"
@@ -69,7 +76,7 @@ const StripeCheckout = ({
 
   return (
     <div>
-      <h3 className="text-white">Stripe checkout {getFinalAmount}</h3>
+      <h3 className="text-white">Stripe checkout {getFinalAmount()}</h3>
       {showStripeButton()}
     </div>
   );
